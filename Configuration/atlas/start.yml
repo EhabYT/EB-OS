@@ -49,7 +49,7 @@ actions:
     runas: currentUserElevated
 
     #Toolbox
-  - !writeStatus: {status: 'Installing AtlasOS Toolbox'}
+  - !writeStatus: {status: 'Installing EB Toolbox'}
   - !powerShell:
     command: '.\SOFTWARE.ps1 -Toolbox'
     exeDir: true

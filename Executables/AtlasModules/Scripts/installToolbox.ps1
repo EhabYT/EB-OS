@@ -1,5 +1,6 @@
-if (Test-Path -Path "C:\Program Files\Atlas Toolbox\AtlasToolbox.exe") {
-    Write-Host "AtlasOS Toolbox is already installed.";
+if ((Test-Path -Path "C:\Program Files\Atlas Toolbox\AtlasToolbox.exe") -or
+    (Test-Path -Path "C:\Program Files\EB Toolbox\EBToolbox.exe")) {
+    Write-Host "EB Toolbox is already installed.";
     Write-Host "Press any key to exit..."
     Read-Host
     exit 0
@@ -10,7 +11,7 @@ else {
         New-Item -ItemType Directory -Path $tempDirectory | Out-Null
 
         Write-Output "Downloading Toolbox..."
-        & curl.exe -LSs "https://github.com/Atlas-OS/atlas-toolbox/releases/latest/download/AtlasToolbox-Setup.exe" -o "$tempDirectory\toolbox.exe"
+        & curl.exe -LSs "https://github.com/EhabYT/EB-Toolbox/releases/download/v0.1.18/EBToolbox-Setup.exe" -o "$tempDirectory\toolbox.exe"
         if (!$?) {
             Write-Error "Downloading Toolbox failed."
             exit 1

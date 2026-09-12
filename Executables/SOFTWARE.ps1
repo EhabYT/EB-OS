@@ -23,7 +23,7 @@ Push-Location $tempDir
 
 # Toolbox
 if ($Toolbox) {
-    & curl.exe -LSs "https://github.com/Atlas-OS/atlas-toolbox/releases/latest/download/AtlasToolbox-Setup.exe" -o "$tempDir\toolbox.exe" $timeouts
+    & curl.exe -LSs "https://github.com/EhabYT/EB-Toolbox/releases/download/v0.1.18/EBToolbox-Setup.exe" -o "$tempDir\toolbox.exe" $timeouts
     if (!$?) {
         Write-Error "Downloading Toolbox failed."
         exit 1

@@ -1,6 +1,11 @@
 # EBOS Changelog
 
-## 1.4.0
+## 1.4.1
+- Toolbox source switched to EB-Toolbox v0.1.18
+  (`EhabYT/EB-Toolbox/.../EBToolbox-Setup.exe`, pinned) in `SOFTWARE.ps1`
+  (playbook `-Toolbox`) and `installToolbox.ps1` (Atlas folder entry point,
+  now also detects an existing EB Toolbox install). Wizard/status strings
+  renamed Atlas(OS) Toolbox → EB Toolbox.
 - Windhawk decoupled: `SetupComplete.cmd` only auto-installs Windhawk when
   `Stage-ImageFiles.ps1 -IncludeWindhawk` created the `include-windhawk.txt`
   marker (matches the wizard default of unchecked). The playbook option
