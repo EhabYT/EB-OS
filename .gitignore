@@ -1,0 +1,3 @@
+# Playbook build output (regenerate with build-playbook.cmd)
+*.apbx
+*.apbx.tmp.zip
