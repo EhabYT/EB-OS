@@ -4,6 +4,6 @@ description: Backs up default EBOS services and drivers, after all the tweaks ar
 actions:
   - !powerShell:
     command: >-
-      .\BACKUP.ps1 -FilePath """$([Environment]::GetFolderPath('Windows'))\AtlasModules\Other\ebosServices.reg"""
+      .\BACKUP.ps1 -FilePath """$([Environment]::GetFolderPath('Windows'))\EBModules\Other\ebosServices.reg"""
     wait: true
     exeDir: true

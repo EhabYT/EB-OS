@@ -3,7 +3,7 @@ DisplayName=ebos-v0.5.x-light
 ThemeId={03C55A0E-9D70-461E-BE82-731690397D68}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\ebos-v0.5.x-light.png
+Wallpaper=%windir%\EBModules\Wallpapers\ebos-v0.5.x-light.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4

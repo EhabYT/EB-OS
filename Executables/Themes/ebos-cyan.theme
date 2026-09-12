@@ -3,7 +3,7 @@ DisplayName=ebos-cyan
 ThemeId={3BF2FD1A-FDA4-4B32-9A7B-8DCC016801F7}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\ebos-cyan.png
+Wallpaper=%windir%\EBModules\Wallpapers\ebos-cyan.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4

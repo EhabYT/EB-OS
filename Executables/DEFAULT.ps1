@@ -3,7 +3,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 $windir = [Environment]::GetFolderPath('Windows')
-$folderItems = Get-ChildItem -Path "$windir\AtlasDesktop\*" -File -Recurse 
+$folderItems = Get-ChildItem -Path "$windir\EBDesktop\*" -File -Recurse 
 $pattern = "\(default\)\.cmd"
 
 foreach ($script in $folderItems)

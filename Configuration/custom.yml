@@ -14,11 +14,41 @@ actions:
     onUpgrade: true
     wait: true
     runas: currentUserElevated
+  # v2.0 migration (Atlas -> EB): carry the service-toggle state hive over to
+  # the new HKLM\SOFTWARE\EBOS location and rewrite stored EBDesktop/EBModules
+  # paths. Runs on upgrade only; harmless when no legacy install exists.
+  - !powerShell:
+    command: |
+      $oldHive = 'HKLM:\SOFTWARE\AtlasOS'
+      $newHive = 'HKLM:\SOFTWARE\EBOS'
+      if ((Test-Path $oldHive) -and !(Test-Path "$newHive\Services")) {
+        Write-Host 'Migrating AtlasOS service state to EBOS...'
+        & reg.exe copy 'HKLM\SOFTWARE\AtlasOS' 'HKLM\SOFTWARE\EBOS' /s /f 2>&1 | Out-Null
+        Get-ChildItem -Path "$newHive\Services" -Recurse -ErrorAction SilentlyContinue |
+          ForEach-Object {
+            $p = (Get-ItemProperty -Path $_.PSPath -Name 'path' -ErrorAction SilentlyContinue).path
+            if ($p) {
+              $fixed = $p -replace 'AtlasDesktop', 'EBDesktop' -replace 'AtlasModules', 'EBModules'
+              if ($fixed -ne $p) { Set-ItemProperty -Path $_.PSPath -Name 'path' -Value $fixed }
+            }
+          }
+        Write-Host 'Migration complete.'
+      } else {
+        Write-Host 'No legacy AtlasOS hive to migrate.'
+      }
+    wait: true
+    exeDir: true
+    oobe: false
+    onUpgrade: true
+    runas: currentUserElevated
   - !powerShell:
     command: |
       $windir = [Environment]::GetFolderPath('Windows')
+      # Remove legacy (<=1.5.x) and current folders so the copy below is clean
       Remove-Item -LiteralPath "$windir\AtlasDesktop" -Force -Recurse -ErrorAction SilentlyContinue
       Remove-Item -LiteralPath "$windir\AtlasModules" -Force -Recurse -ErrorAction SilentlyContinue
+      Remove-Item -LiteralPath "$windir\EBDesktop" -Force -Recurse -ErrorAction SilentlyContinue
+      Remove-Item -LiteralPath "$windir\EBModules" -Force -Recurse -ErrorAction SilentlyContinue
     wait: true
     exeDir: true
     oobe: false
@@ -29,14 +59,14 @@ actions:
     command: |
       $windir = [Environment]::GetFolderPath('Windows')
       @(
-          'AtlasModules',
-          'AtlasDesktop'
+          'EBModules',
+          'EBDesktop'
       ) | ForEach-Object {
           if (!(Test-Path $_)) { exit 1 }
           Copy-Item -Path $_ -Destination $windir -Force -Recurse
           if (!$?) { exit 2 }
       }
-      Start-Process -FilePath """$windir\AtlasDesktop\6. Advanced Configuration\Process Explorer\Uninstall Process Explorer.cmd""" -ArgumentList "/silent" -WindowStyle Hidden
+      Start-Process -FilePath """$windir\EBDesktop\6. Advanced Configuration\Process Explorer\Uninstall Process Explorer.cmd""" -ArgumentList "/silent" -WindowStyle Hidden
       Copy-Item -Path 'Themes\*' -Destination """$windir\Resources\Themes""" -Force -Recurse
     weight: 10
     wait: true
@@ -73,12 +103,12 @@ actions:
 
   # Main tasks
   - !writeStatus: { status: "Applying base configuration" }
-  - !task: { path: 'atlas\start.yml' }
-  - !task: { path: 'atlas\services.yml' }
-  - !task: { path: 'atlas\components.yml' }
-  - !task: { path: 'atlas\appx.yml' }
-  - !task: { path: 'atlas\default.yml' }
-  - !task: { path: 'atlas\revert.yml' }
+  - !task: { path: 'ebos\start.yml' }
+  - !task: { path: 'ebos\services.yml' }
+  - !task: { path: 'ebos\components.yml' }
+  - !task: { path: 'ebos\appx.yml' }
+  - !task: { path: 'ebos\default.yml' }
+  - !task: { path: 'ebos\revert.yml' }
   - !task: { path: "tweaks.yml" }
 
   # Set hives to HKU default user
@@ -106,7 +136,7 @@ actions:
   - !writeStatus: { status: "Finalizing EBOS configuration" }
 
   # Set PowerShell execution policy to RemoteSigned from the previous "Unrestricted"
-  # This allows Atlas folder scripts (local) to run while requiring signatures for downloaded scripts
+  # This allows EB OS folder scripts (local) to run while requiring signatures for downloaded scripts
   - !writeStatus: { status: "Securing PowerShell execution policy" }
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell'

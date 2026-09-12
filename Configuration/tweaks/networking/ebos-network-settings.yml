@@ -1,0 +1,9 @@
+---
+title: Applies EB OS Network Settings
+description: Applies EB OS optimised network settings
+actions:
+  - !cmd:
+    command: '"EBDesktop\9. Troubleshooting\Network\Reset Network to EB OS Default.cmd" /silent'
+    exeDir: true
+    wait: true
+    runas: currentUserElevated

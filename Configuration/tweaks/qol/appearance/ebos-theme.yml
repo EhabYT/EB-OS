@@ -5,7 +5,7 @@ actions:
     # Apply theme file and set recent themes
   - !powerShell:
     command: |
-      .\AtlasModules\initPowerShell.ps1
+      .\EBModules\initPowerShell.ps1
       Set-ThemeMRU
     wait: true
     onUpgrade: true
@@ -15,7 +15,7 @@ actions:
     
   - !powerShell:
     command: |
-      .\AtlasModules\initPowerShell.ps1
+      .\EBModules\initPowerShell.ps1
       Set-Theme -Path """$([Environment]::GetFolderPath('Windows'))\Resources\Themes\ebos-cyan.theme"""
       Set-ThemeMRU
     wait: true
@@ -47,7 +47,7 @@ actions:
     onUpgrade: false
   - !powerShell:
     command: |
-      .\AtlasModules\initPowerShell.ps1
+      .\EBModules\initPowerShell.ps1
       Set-LockscreenImage
     exeDir: true
     wait: true

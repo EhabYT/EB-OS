@@ -1,0 +1,16 @@
+---
+title: Defaults
+description: Run default EB OS folder scripts
+actions:
+  - !writeStatus: {status: 'Applying default EB OS folder settings'}
+  - !cmd:
+    command: 'reg import .\DEFAULT.reg'
+    exeDir: true
+    wait: true
+    runas: currentUserElevated
+  - !powerShell:
+    command: '.\DEFAULT.ps1'
+    exeDir: true
+    onUpgrade: true
+    wait: true
+    runas: currentUserElevated

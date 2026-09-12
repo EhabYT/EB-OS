@@ -1,6 +1,6 @@
-# EBOS Release (AtlasOS Playbook)
+# EBOS Release (EB OS Playbook)
 
-EBOS is an enhanced AtlasOS playbook for Windows 11 (24H2/25H2).
+EBOS is an enhanced EB OS playbook for Windows 11 (24H2/25H2).
 Apply it with [AME Wizard](https://docs.atlasos.net/getting-started/installation)
 by dropping `EBOS Release.apbx` into the wizard window.
 
@@ -22,8 +22,8 @@ tokens, and packages everything into `EBOS Release.apbx`
 | Path | Ships where | Purpose |
 |---|---|---|
 | `playbook.conf` | apbx root | Playbook metadata, version (single source of truth), supported builds, wizard pages |
-| `Configuration/` | apbx only | AME Wizard tasks (`custom.yml`, `tweaks.yml`, `atlas/`, `tweaks/`) |
-| `Executables/` | `C:\Windows\` | `AtlasModules/`, `AtlasDesktop/` (post-install folder), setup scripts |
+| `Configuration/` | apbx only | AME Wizard tasks (`custom.yml`, `tweaks.yml`, `ebos/`, `tweaks/`) |
+| `Executables/` | `C:\Windows\` | `EBModules/`, `EBDesktop/` (post-install folder), setup scripts |
 | `Images/` | apbx only | Browser icons for the wizard pages |
 | `Build-Playbook.ps1` | apbx root | Builder (called by `build-playbook.cmd`) |
 
@@ -48,5 +48,12 @@ package time (it fails the build if a token survives).
 
 ## Verify on a deployed machine
 
-Atlas folder → `9. Troubleshooting` → `Verify EBOS Configuration.cmd`
+EB OS folder → `9. Troubleshooting` → `Verify EBOS Configuration.cmd`
 (checks services, policies, power plan, theme, OEM; `-FixIssues` repairs).
+
+## Upgrade notes (2.0.0)
+
+2.0.0 renames the deployed folders (`AtlasDesktop` → `EBDesktop`,
+`AtlasModules` → `EBModules`) and the state hive
+(`HKLM\SOFTWARE\AtlasOS` → `HKLM\SOFTWARE\EBOS`). Upgrading via the wizard
+migrates toggle states automatically; fresh installs are unaffected.

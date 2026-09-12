@@ -8,7 +8,7 @@
     Author: Senior Windows Kernel Engineer
     Version: 3.1.0
     Requires: Windows 10/11, PowerShell 5.1+, Administrator rights
-    Compatibility: AME Wizard, AtlasOS, EBOS Playbooks
+    Compatibility: AME Wizard, EB OS playbooks
 #>
 
 #Requires -RunAsAdministrator

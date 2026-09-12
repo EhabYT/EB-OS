@@ -17,7 +17,7 @@ actions:
       $candidates = @(
         (Join-Path (Get-Location) 'tweaks\performance\ebos-process-optimization\ServiceGroupingConsolidation.reg'),
         (Join-Path (Get-Location) 'Configuration\tweaks\performance\ebos-process-optimization\ServiceGroupingConsolidation.reg'),
-        (Join-Path $env:SystemRoot 'AtlasModules\ServiceGroupingConsolidation.reg')
+        (Join-Path $env:SystemRoot 'EBModules\ServiceGroupingConsolidation.reg')
       )
       $regFile = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
       if (-not $regFile) {

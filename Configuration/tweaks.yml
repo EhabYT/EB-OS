@@ -1,6 +1,6 @@
 ---
 title: Tweaks Root Playbook File
-description: Runs all of the Atlas playbook tweaks
+description: Runs all of the EB OS playbook tweaks
 actions:
   # ------------------------- NOTES ------------------------- #
 
@@ -24,7 +24,7 @@ actions:
   # to improving network performance, security, etc.
   # -----------------------------------------------------
   - !writeStatus: {status: 'Running networking tweaks'}
-  - !task: {path: 'tweaks\networking\atlas-network-settings.yml'}
+  - !task: {path: 'tweaks\networking\ebos-network-settings.yml'}
 
   # -------------------------------------------------------------------------- #
   #  networking\shares                                                         #

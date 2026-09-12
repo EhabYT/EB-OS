@@ -1,9 +1,9 @@
 [Theme]
-DisplayName=Atlas v0.5.x Light
+DisplayName=EBOS v0.5.x Light
 ThemeId={D8EF7D75-D11F-4007-AC65-A242DEBB3766}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\atlas-v0.5.x-light.png
+Wallpaper=%windir%\EBModules\Wallpapers\atlas-v0.5.x-light.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4

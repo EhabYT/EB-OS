@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Unattended Windhawk provisioning for a customized Windows 11 image (Atlas-like).
+  Unattended Windhawk provisioning for a customized Windows 11 image (EB OS-like).
   Silently installs the Windhawk engine and applies a fully-transparent Windows 11
   taskbar via the "Windows 11 Taskbar Styler" mod. Safe to run during image
   deployment or on first system boot (e.g. from SetupComplete.cmd / an unattend

@@ -1,6 +1,38 @@
 # EBOS Changelog
 
-## 1.4.1
+## 2.0.0 (breaking: upgrade migration included)
+- Full identifier migration Atlas → EB: registry hive
+  `HKLM\SOFTWARE\AtlasOS` → `HKLM\SOFTWARE\EBOS`, deployed folders
+  `C:\Windows\AtlasDesktop|AtlasModules` → `EBDesktop|EBModules`, config dir
+  `Configuration\atlas\` → `ebos\`, packages `Z-Atlas-*` → `Z-EBOS-*`,
+  `AtlasTerminals` → `EBTerminals` keys, `DefaultAtlasNetwork` →
+  `DefaultEBNetwork`, `AtlasPackagesOld` → `EBPackagesOld`,
+  `atlas-folder.ico` → `eb-folder.ico`, `atlas-network-settings.yml` →
+  `ebos-network-settings.yml`, theme `DisplayName`s, internal
+  function/variable names.
+- `custom.yml` migrates existing installs on upgrade (hive copy + path
+  rewrite); `SETPATHS.ps1` follows the new layout.
+- Fixed `ebos-network-settings.yml` calling a `.cmd` via `!powerShell`
+  (syntax error) → `!cmd`, matching every other script-calling tweak.
+- Kept intentionally: upstream URLs/credits/docs links, community shortcuts,
+  legacy atlas-* theme/wallpaper artwork (name collisions), `.atlasmodule`
+  extension, Toolbox legacy-path check.
+
+## 1.5.0
+- Rebrand Atlas OS → EB OS across all user-facing strings (wizard pages,
+  statuses, dialogs, console output, shortcut names). Technical identifiers
+  intentionally untouched: `AtlasDesktop`/`AtlasModules` paths,
+  `HKLM\SOFTWARE\AtlasOS` keys, `Z-Atlas-*` packages, upstream URLs/credits.
+- Renamed (refs updated): `Install EB Toolbox.cmd`, `Reset Network to EB OS
+  Default.cmd` (+ `DEFAULT.reg` paths), `EBOS Visual Effects (default).cmd`
+  (+ `newUsers.ps1`), `EBOS.lnk` shortcut.
+- File-type progID `AtlasPlaybook.apbx` → `EBOSPlaybook.apbx`
+  (`C:\ProgramData\EBOSPlaybook`, "EB OS Playbook").
+- Restored 3 corrupted files: Toolbox twins of `Fix Errors 2502 and 2503.cmd`
+  and `Repair Windows Components.cmd` (every `n` had become `o`, scripts were
+  non-functional), and `DebloatSendToContextMenu.ps1` (every `"` had become
+  `A`) from upstream Atlas with EB OS dialog title. Also renamed Toolbox-only
+  `AtlasDefaults.cmd` → `EBOSDefaults.cmd`.
 - Toolbox source switched to EB-Toolbox v0.1.18
   (`EhabYT/EB-Toolbox/.../EBToolbox-Setup.exe`, pinned) in `SOFTWARE.ps1`
   (playbook `-Toolbox`) and `installToolbox.ps1` (Atlas folder entry point,

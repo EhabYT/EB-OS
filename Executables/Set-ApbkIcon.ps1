@@ -9,7 +9,7 @@
     Explorer *file-type* icon via the registry.
   - This registers the .apbx file type (HKCU, no admin needed) and points its
     DefaultIcon at playbook.ico.
-  - For a deployed image, use -Deploy: the .ico is copied to C:\ProgramData\AtlasPlaybook
+  - For a deployed image, use -Deploy: the .ico is copied to C:\ProgramData\EBOSPlaybook
     and the file type is registered under HKLM (machine-wide, all users) — suitable for
     running from SetupComplete.cmd in the SYSTEM context.
 #>
@@ -93,7 +93,7 @@ if (Test-Path $PngPath) {
 # --- 2. Optional: copy to a stable deploy location ---
 $iconRef = $IcoPath
 if ($Deploy) {
-    $destDir = Join-Path $env:ProgramData "AtlasPlaybook"
+    $destDir = Join-Path $env:ProgramData "EBOSPlaybook"
     New-Item -ItemType Directory -Force -Path $destDir | Out-Null
     Copy-Item -Path $IcoPath -Destination (Join-Path $destDir "playbook.ico") -Force
     $iconRef = Join-Path $destDir "playbook.ico"
@@ -103,7 +103,7 @@ if ($Deploy) {
 # --- 3. Register the .apbx file type icon ---
 # Without -Deploy: per-user (HKCU, no admin). With -Deploy: machine-wide (HKLM),
 # so it applies to every user when run during image setup (SYSTEM context).
-$prog = "AtlasPlaybook.apbx"
+$prog = "EBOSPlaybook.apbx"
 if ($Deploy) {
     $classes = "HKLM:\Software\Classes"
 } else {
@@ -112,7 +112,7 @@ if ($Deploy) {
 New-Item -Path "$classes\.apbx" -Force | Out-Null
 Set-ItemProperty -Path "$classes\.apbx" -Name "(default)" -Value $prog
 New-Item -Path "$classes\$prog" -Force | Out-Null
-Set-ItemProperty -Path "$classes\$prog" -Name "(default)" -Value "Atlas Playbook"
+Set-ItemProperty -Path "$classes\$prog" -Name "(default)" -Value "EB OS Playbook"
 New-Item -Path "$classes\$prog\DefaultIcon" -Force | Out-Null
 Set-ItemProperty -Path "$classes\$prog\DefaultIcon" -Name "(default)" -Value "$iconRef,0"
 Write-Host "Registered .apbx icon ($classes) -> $iconRef,0" -ForegroundColor Green

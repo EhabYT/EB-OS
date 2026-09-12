@@ -3,7 +3,7 @@ DisplayName=ebos-liquid-glass
 ThemeId={B8AB47FF-2721-46C8-9871-AA5F7CC35ADA}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\ebos-liquid-glass.png
+Wallpaper=%windir%\EBModules\Wallpapers\ebos-liquid-glass.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4

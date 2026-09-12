@@ -1,9 +1,9 @@
 [Theme]
-DisplayName=Atlas Solid
+DisplayName=EBOS Solid
 ThemeId={1545A5F7-3E0C-4670-8A21-99FDEEA37AA5}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\atlas-solid.png
+Wallpaper=%windir%\EBModules\Wallpapers\atlas-solid.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4

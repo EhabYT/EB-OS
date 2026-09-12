@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Downloads and silently installs OBS Studio (pinned version) and pins it to the Start menu.
-  Designed to be invoked from the Atlas playbook (.\Install-OBS.ps1, exeDir: true).
+  Designed to be invoked from the EB OS playbook (.\Install-OBS.ps1, exeDir: true).
 #>
 $ErrorActionPreference = 'Stop'
 

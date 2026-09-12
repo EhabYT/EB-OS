@@ -515,7 +515,7 @@ If the optimization fails, the module automatically attempts to restore critical
 
 ## Integration
 
-This module integrates with the Atlas/EBOS playbook system through:
+This module integrates with the EB OS playbook system through:
 
 1. `Configuration\tweaks\performance\ebos-process-optimization.yml` - Main YAML manifest
 2. `Configuration\tweaks\performance\ebos-process-optimization\` - Module directory
@@ -621,7 +621,7 @@ Get-Service | Where-Object { $_.StartType -eq 'Disabled' }
 
 ## License
 
-This module is part of the EBOS (Enhanced AtlasOS) project.
+This module is part of the EBOS (EB OS) project.
 
 ## Support
 

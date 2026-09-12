@@ -6,7 +6,7 @@ if (-not $isAdmin) {
 }
 
 $windir = [Environment]::GetFolderPath('Windows')
-$rootPath = "HKLM:\SOFTWARE\AtlasOS\Services"
+$rootPath = "HKLM:\SOFTWARE\EBOS\Services"
 $registryKeys = Get-ChildItem -Path $rootPath -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSIsContainer }
 
 $valueName = "path"
@@ -14,11 +14,11 @@ foreach ($key in $registryKeys) {
     $path = (Get-ItemProperty -Path $key.PSPath -Name $valueName -ErrorAction SilentlyContinue).$valueName
     if ([string]::IsNullOrEmpty($path)) { continue }
     Write-Output($path)
-    if ($path -notlike "$windir\AtlasDesktop\*") {
-        $marker = "AtlasDesktop\"
+    if ($path -notlike "$windir\EBDesktop\*") {
+        $marker = "EBDesktop\"
         $index = $path.IndexOf($marker)
         if ($index -lt 0) { continue }
         $result = $path.Substring($index + $marker.Length)
-        Set-ItemProperty -Path $key.PSPath -Name $valueName -Value "$windir\AtlasDesktop\$result"
+        Set-ItemProperty -Path $key.PSPath -Name $valueName -Value "$windir\EBDesktop\$result"
     }
 }

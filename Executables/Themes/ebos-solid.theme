@@ -3,7 +3,7 @@ DisplayName=ebos-solid
 ThemeId={85D3A9B8-9E1E-4308-9D90-0E9B47272F51}
 
 [Control Panel\Desktop]
-Wallpaper=%windir%\AtlasModules\Wallpapers\ebos-solid.png
+Wallpaper=%windir%\EBModules\Wallpapers\ebos-solid.png
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4
